@@ -35,3 +35,9 @@ jspm_packages
 
 # Optional REPL history
 .node_repl_history
+.idea/
+TennisGame1.js
+TennisGame2.js
+TennisGame3.js
+TennisTest.html
+TennisTest.js
