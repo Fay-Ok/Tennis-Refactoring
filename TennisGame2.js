@@ -5,8 +5,8 @@ var TennisGame2 = function(player1Name, player2Name) {
     this.P1res = "";
     this.P2res = "";
 
-    this.player1Name = player1Name;
-    this.player2Name = player2Name;
+    this.playerOneName = player1Name;
+    this.playerTwoName = player2Name;
 };
 
 TennisGame2.prototype.getScore = function() {

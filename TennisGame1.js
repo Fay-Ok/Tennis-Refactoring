@@ -1,8 +1,6 @@
-var TennisGame1 = function (player1Name, player2Name) {
+var TennisGame1 = function () {
     this.playerOneScore = 0;
     this.playerTwoScore = 0;
-    this.player1Name = player1Name;
-    this.player2Name = player2Name;
 };
 
 TennisGame1.prototype.wonPoint = function (playerName) {
@@ -35,7 +33,9 @@ TennisGame1.prototype.getScore = function () {
     var tieScoreDictionary = {
         0: loveAll,
         1: fifteenAll,
-        2: thirtyAll
+        2: thirtyAll,
+        3: "Deuce",
+        4: "Deuce"
     };
 
     var scoreDictionary = {
@@ -51,21 +51,20 @@ TennisGame1.prototype.getScore = function () {
 
     };
 
-    function tieGame(tiescore) {
-        if (tieScoreDictionary[tiescore]) {
-            score = tieScoreDictionary[tiescore];
-        }
-        else {
-            score = duece;
-        }
+    function tieGame(tieScore) {
+        score = tieScoreDictionary[tieScore];
     }
 
     function winnerPlayer(playerOneScore, playerTwoScore) {
+
         var minusResult = playerOneScore - playerTwoScore;
 
         if (scoreDifference[minusResult]) {
+
             score = scoreDifference[minusResult];
+
         } else if (minusResult >= 2) {
+
             score = winForPlayerOne;
         }
         else {
@@ -74,26 +73,16 @@ TennisGame1.prototype.getScore = function () {
     }
 
     function scorePrinter(playerOneScore, playerTwoScore) {
-
-        for (var i = 1; i < 3; i++) {
-            console.log(i);
-            if (i === 1) {
-                tempScore = playerOneScore;
-            }
-            else {
-                score += "-";
-                tempScore = playerTwoScore;
-            }
-            score += scoreDictionary[tempScore];
-            console.log(score);
-        }
+        score = scoreDictionary[playerOneScore] + "-" + scoreDictionary[playerTwoScore];
     }
 
 
     if (this.playerOneScore === this.playerTwoScore) {
+
         tieGame.call(this, this.playerOneScore);
 
     } else if (this.playerOneScore >= 4 || this.playerTwoScore >= 4) {
+
         winnerPlayer.call(this, this.playerOneScore, this.playerTwoScore);
 
     } else {
