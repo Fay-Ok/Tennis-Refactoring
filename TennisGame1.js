@@ -55,16 +55,23 @@ TennisGame1.prototype.getScore = function () {
         score = tieScoreDictionary[tieScore];
     }
 
-    function winnerPlayer(playerOneScore, playerTwoScore) {
 
+    function scorePrinter(playerOneScore, playerTwoScore) {
+        score = scoreDictionary[playerOneScore] + "-" + scoreDictionary[playerTwoScore];
+    }
+
+    function getAdvantage(playerOneScore, playerTwoScore) {
         var minusResult = playerOneScore - playerTwoScore;
 
         if (scoreDifference[minusResult]) {
-
             score = scoreDifference[minusResult];
+        } else {
+            chooseWinner(playerOneScore, playerTwoScore);
+        }
+    }
 
-        } else if (minusResult >= 2) {
-
+    function chooseWinner(playerOneScore, playerTwoScore) {
+        if (playerOneScore > playerTwoScore) {
             score = winForPlayerOne;
         }
         else {
@@ -72,18 +79,11 @@ TennisGame1.prototype.getScore = function () {
         }
     }
 
-    function scorePrinter(playerOneScore, playerTwoScore) {
-        score = scoreDictionary[playerOneScore] + "-" + scoreDictionary[playerTwoScore];
-    }
-
-
     if (this.playerOneScore === this.playerTwoScore) {
-
         tieGame.call(this, this.playerOneScore);
 
     } else if (this.playerOneScore >= 4 || this.playerTwoScore >= 4) {
-
-        winnerPlayer.call(this, this.playerOneScore, this.playerTwoScore);
+        getAdvantage.call(this, this.playerOneScore, this.playerTwoScore);
 
     } else {
         scorePrinter.call(this, this.playerOneScore, this.playerTwoScore);
