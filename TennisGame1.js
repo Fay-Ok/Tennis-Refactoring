@@ -5,6 +5,7 @@ var TennisGame1 = function () {
 
 TennisGame1.prototype.wonPoint = function (playerName) {
     var playerOne = "player1";
+
     if (playerName === playerOne)
         this.playerOneScore += 1;
     else
@@ -18,7 +19,6 @@ TennisGame1.prototype.getScore = function () {
     var loveAll = "Love-All";
     var fifteenAll = "Fifteen-All";
     var thirtyAll = "Thirty-All";
-    var duece = "Deuce";
 
     var advantagePlayerOne = "Advantage player1";
     var advantagePlayerTwo = "Advantage player2";
@@ -61,6 +61,7 @@ TennisGame1.prototype.getScore = function () {
     }
 
     function getAdvantage(playerOneScore, playerTwoScore) {
+
         var minusResult = playerOneScore - playerTwoScore;
 
         if (scoreDifference[minusResult]) {
@@ -71,12 +72,8 @@ TennisGame1.prototype.getScore = function () {
     }
 
     function chooseWinner(playerOneScore, playerTwoScore) {
-        if (playerOneScore > playerTwoScore) {
-            score = winForPlayerOne;
-        }
-        else {
-            score = winForPlayerTwo;
-        }
+
+        score = playerOneScore > playerTwoScore ? winForPlayerOne : winForPlayerTwo;
     }
 
     if (this.playerOneScore === this.playerTwoScore) {
