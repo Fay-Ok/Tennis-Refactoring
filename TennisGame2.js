@@ -19,14 +19,16 @@ TennisGame2.prototype.getScore = function () {
     var winForPlayerOne = "Win for player1";
     var winForPlayerTwo = "Win for player2";
 
+    var playersScoreDic = {
+        0: love,
+        1: Fifteen,
+        2: Thirty,
+        3: Forty
+    };
+
     if (this.playerOneScore === this.playerTwoScore && this.playerOneScore < 3) {
 
-        if (this.playerOneScore === 0)
-            score = love;
-        if (this.playerOneScore === 1)
-            score = Fifteen;
-        if (this.playerOneScore === 2)
-            score = Thirty;
+        score = playersScoreDic[this.playerOneScore];
         score += All;
     }
     if (this.playerOneScore === this.playerTwoScore && this.playerOneScore > 2)
@@ -34,48 +36,28 @@ TennisGame2.prototype.getScore = function () {
 
 
     if (this.playerOneScore > 0 && this.playerTwoScore === 0) {
-        if (this.playerOneScore === 1)
-            this.P1res = Fifteen;
-        if (this.playerOneScore === 2)
-            this.P1res = Thirty;
-        if (this.playerOneScore === 3)
-            this.P1res = Forty;
 
+        this.P1res = playersScoreDic[this.playerOneScore];
         this.P2res = love;
         score = this.P1res + "-" + this.P2res;
     }
     if (this.playerTwoScore > 0 && this.playerOneScore === 0) {
-        if (this.playerTwoScore === 1)
-            this.P2res = Fifteen;
-        if (this.playerTwoScore === 2)
-            this.P2res = Thirty;
-        if (this.playerTwoScore === 3)
-            this.P2res = Forty;
 
+        this.P2res = playersScoreDic[this.playerTwoScore];
         this.P1res = love;
         score = this.P1res + "-" + this.P2res;
     }
 
     if (this.playerOneScore > this.playerTwoScore && this.playerOneScore < 4) {
-        if (this.playerOneScore === 2)
-            this.P1res = Thirty;
-        if (this.playerOneScore === 3)
-            this.P1res = Forty;
-        if (this.playerTwoScore === 1)
-            this.P2res = Fifteen;
-        if (this.playerTwoScore === 2)
-            this.P2res = Thirty;
+
+        this.P1res = playersScoreDic[this.playerOneScore];
+        this.P2res = playersScoreDic[this.playerTwoScore];
         score = this.P1res + "-" + this.P2res;
     }
     if (this.playerTwoScore > this.playerOneScore && this.playerTwoScore < 4) {
-        if (this.playerTwoScore === 2)
-            this.P2res = Thirty;
-        if (this.playerTwoScore === 3)
-            this.P2res = Forty;
-        if (this.playerOneScore === 1)
-            this.P1res = Fifteen;
-        if (this.playerOneScore === 2)
-            this.P1res = Thirty;
+
+        this.P1res = playersScoreDic[this.playerOneScore];
+        this.P2res = playersScoreDic[this.playerTwoScore];
         score = this.P1res + "-" + this.P2res;
     }
 
@@ -99,9 +81,12 @@ TennisGame2.prototype.getScore = function () {
     return score;
 };
 
+var playerOne = "player1";
+
 TennisGame2.prototype.wonPoint = function (player) {
 
-    player === "player1" ? this.playerOneScore++ : this.playerTwoScore++;
+
+    player === playerOne ? this.playerOneScore++ : this.playerTwoScore++;
 
 };
 
