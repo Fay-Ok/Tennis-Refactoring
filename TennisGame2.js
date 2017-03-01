@@ -19,46 +19,54 @@ TennisGame2.prototype.getScore = function () {
     var winForPlayerOne = "Win for player1";
     var winForPlayerTwo = "Win for player2";
 
-    var playersScoreDic = {
+    var scoreLookup = {
         0: love,
         1: Fifteen,
         2: Thirty,
         3: Forty
     };
 
+    TennisGame2.prototype.printTwoPlayersScore = function () {
+
+        this.P1res = scoreLookup[this.playerOneScore];
+        this.P2res = scoreLookup[this.playerTwoScore];
+        score = this.P1res + "-" + this.P2res;
+    };
+
+
     if (this.playerOneScore === this.playerTwoScore && this.playerOneScore < 3) {
 
-        score = playersScoreDic[this.playerOneScore];
+        score = scoreLookup[this.playerOneScore];
         score += All;
     }
+
     if (this.playerOneScore === this.playerTwoScore && this.playerOneScore > 2)
         score = "Deuce";
 
 
     if (this.playerOneScore > 0 && this.playerTwoScore === 0) {
 
-        this.P1res = playersScoreDic[this.playerOneScore];
+        this.P1res = scoreLookup[this.playerOneScore];
         this.P2res = love;
         score = this.P1res + "-" + this.P2res;
     }
+
     if (this.playerTwoScore > 0 && this.playerOneScore === 0) {
 
-        this.P2res = playersScoreDic[this.playerTwoScore];
+        this.P2res = scoreLookup[this.playerTwoScore];
         this.P1res = love;
         score = this.P1res + "-" + this.P2res;
     }
 
     if (this.playerOneScore > this.playerTwoScore && this.playerOneScore < 4) {
 
-        this.P1res = playersScoreDic[this.playerOneScore];
-        this.P2res = playersScoreDic[this.playerTwoScore];
-        score = this.P1res + "-" + this.P2res;
+        this.printTwoPlayersScore();
     }
+
+
     if (this.playerTwoScore > this.playerOneScore && this.playerTwoScore < 4) {
 
-        this.P1res = playersScoreDic[this.playerOneScore];
-        this.P2res = playersScoreDic[this.playerTwoScore];
-        score = this.P1res + "-" + this.P2res;
+        this.printTwoPlayersScore();
     }
 
     if (this.playerOneScore > this.playerTwoScore && this.playerTwoScore >= 3) {
@@ -81,10 +89,9 @@ TennisGame2.prototype.getScore = function () {
     return score;
 };
 
-var playerOne = "player1";
 
 TennisGame2.prototype.wonPoint = function (player) {
-
+    var playerOne = "player1";
 
     player === playerOne ? this.playerOneScore++ : this.playerTwoScore++;
 
