@@ -4,39 +4,35 @@ var TennisGame2 = function () {
 
     this.P1res = "";
     this.P2res = "";
+    this.AdvantagePlayerOne = "Advantage player1";
+    this.AdvantagePlayerTwo = "Advantage player2";
+    this.winForPlayerOne = "Win for player1";
+    this.winForPlayerTwo = "Win for player2";
+
+    this.scoreLookup = {
+        0: "Love",
+        1: "Fifteen",
+        2: "Thirty",
+        3: "Forty"
+    };
 
 };
 
 TennisGame2.prototype.getScore = function () {
     var score = "";
-    var love = "Love";
-    var Fifteen = "Fifteen";
-    var Thirty = "Thirty";
     var All = "-All";
-    var Forty = "Forty";
-    var AdvantagePlayerOne = "Advantage player1";
-    var AdvantagePlayerTwo = "Advantage player2";
-    var winForPlayerOne = "Win for player1";
-    var winForPlayerTwo = "Win for player2";
-
-    var scoreLookup = {
-        0: love,
-        1: Fifteen,
-        2: Thirty,
-        3: Forty
-    };
 
     TennisGame2.prototype.printTwoPlayersScore = function () {
 
-        this.P1res = scoreLookup[this.playerOneScore];
-        this.P2res = scoreLookup[this.playerTwoScore];
+        this.P1res = this.scoreLookup[this.playerOneScore];
+        this.P2res = this.scoreLookup[this.playerTwoScore];
         score = this.P1res + "-" + this.P2res;
     };
 
 
     if (this.playerOneScore === this.playerTwoScore && this.playerOneScore < 3) {
 
-        score = scoreLookup[this.playerOneScore];
+        score = this.scoreLookup[this.playerOneScore];
         score += All;
     }
 
@@ -46,15 +42,15 @@ TennisGame2.prototype.getScore = function () {
 
     if (this.playerOneScore > 0 && this.playerTwoScore === 0) {
 
-        this.P1res = scoreLookup[this.playerOneScore];
-        this.P2res = love;
+        this.P1res = this.scoreLookup[this.playerOneScore];
+        this.P2res = "love";
         score = this.P1res + "-" + this.P2res;
     }
 
     if (this.playerTwoScore > 0 && this.playerOneScore === 0) {
 
-        this.P2res = scoreLookup[this.playerTwoScore];
-        this.P1res = love;
+        this.P2res = this.scoreLookup[this.playerTwoScore];
+        this.P1res = "love";
         score = this.P1res + "-" + this.P2res;
     }
 
@@ -71,20 +67,20 @@ TennisGame2.prototype.getScore = function () {
 
     if (this.playerOneScore > this.playerTwoScore && this.playerTwoScore >= 3) {
 
-        score = AdvantagePlayerOne;
+        score = this.AdvantagePlayerOne;
     }
 
     if (this.playerTwoScore > this.playerOneScore && this.playerOneScore >= 3) {
-        score = AdvantagePlayerTwo;
+        score = this.AdvantagePlayerTwo;
     }
 
     if (this.playerOneScore >= 4 && this.playerTwoScore >= 0 && (this.playerOneScore - this.playerTwoScore) >= 2) {
 
-        score = winForPlayerOne;
+        score = this.winForPlayerOne;
     }
     if (this.playerTwoScore >= 4 && this.playerOneScore >= 0 && (this.playerTwoScore - this.playerOneScore) >= 2) {
 
-        score = winForPlayerTwo;
+        score = this.winForPlayerTwo;
     }
     return score;
 };
