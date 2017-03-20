@@ -30,15 +30,27 @@ TennisGame2.prototype.getScore = function () {
     };
 
 
-    if (this.playerOneScore === this.playerTwoScore && this.playerOneScore < 3) {
+    if (this.playerOneScore === this.playerTwoScore) {
 
-        score = this.scoreLookup[this.playerOneScore];
-        score += All;
+        if (this.playerOneScore < 3) {
+            score = this.scoreLookup[this.playerOneScore];
+            score += All;
+        }
     }
 
-    if (this.playerOneScore === this.playerTwoScore && this.playerOneScore > 2)
-        score = "Deuce";
+    if (this.playerOneScore >= 3 && this.playerTwoScore >= 3) {
 
+        if (this.playerOneScore > this.playerTwoScore) {
+            score = this.AdvantagePlayerOne;
+
+        }
+        if (this.playerTwoScore > this.playerOneScore) {
+            score = this.AdvantagePlayerTwo;
+        }
+        if (this.playerOneScore === this.playerTwoScore) {
+            score = "Deuce";
+        }
+    }
 
     if (this.playerOneScore > 0 && this.playerTwoScore === 0) {
 
@@ -54,43 +66,41 @@ TennisGame2.prototype.getScore = function () {
         score = this.P1res + "-" + this.P2res;
     }
 
-    if (this.playerOneScore > this.playerTwoScore && this.playerOneScore < 4) {
+    if (this.playerTwoScore < 4 && this.playerOneScore < 4) {
 
-        this.printTwoPlayersScore();
+        if (this.playerOneScore !== this.playerTwoScore) {
+            this.printTwoPlayersScore();
+        }
     }
 
+    if (this.playerOneScore >= 4 && this.playerTwoScore >= 0) {
 
-    if (this.playerTwoScore > this.playerOneScore && this.playerTwoScore < 4) {
-
-        this.printTwoPlayersScore();
+        if (this.scoreDifference(this.playerOneScore,this.playerTwoScore) >= 2) {
+            score = this.winForPlayerOne;
+        }
     }
 
-    if (this.playerOneScore > this.playerTwoScore && this.playerTwoScore >= 3) {
+    if (this.playerTwoScore >= 4 && this.playerOneScore >= 0) {
 
-        score = this.AdvantagePlayerOne;
+        if (this.scoreDifference(this.playerTwoScore,this.playerOneScore) >= 2) {
+            score = this.winForPlayerTwo;
+        }
     }
 
-    if (this.playerTwoScore > this.playerOneScore && this.playerOneScore >= 3) {
-        score = this.AdvantagePlayerTwo;
-    }
-
-    if (this.playerOneScore >= 4 && this.playerTwoScore >= 0 && (this.playerOneScore - this.playerTwoScore) >= 2) {
-
-        score = this.winForPlayerOne;
-    }
-    if (this.playerTwoScore >= 4 && this.playerOneScore >= 0 && (this.playerTwoScore - this.playerOneScore) >= 2) {
-
-        score = this.winForPlayerTwo;
-    }
     return score;
-};
+}
+;
 
 
 TennisGame2.prototype.wonPoint = function (player) {
-    var playerOne = "player1";
 
+    var playerOne = "player1";
     player === playerOne ? this.playerOneScore++ : this.playerTwoScore++;
 
+};
+
+TennisGame2.prototype.scoreDifference = function (firstPlayer, secondPlayer) {
+    return firstPlayer - secondPlayer;
 };
 
 if (typeof window === "undefined") {
